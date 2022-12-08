@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="DELETE">
+        <active>true</active>
+        <before>false</before>
+        <description/>
+        <flush_cache>false</flush_cache>
+        <name>Loaner system Fix Script - GLOBAL</name>
+        <record_for_rollback>false</record_for_rollback>
+        <run_once>true</run_once>
+        <script><![CDATA[var propList = [
+	{
+	 'suffix' : null,
+	 'name' : 'glide.ui.x_loaner_task_activity.fields',
+	 'description' : 'Activity formatter fields for loaner task form',
+	 'type' : 'string',
+	 'value' : 'assigned_to,state,opened_by,work_notes,comments,*Attachments*'
+	},
+	{
+	 'suffix' : null,
+	 'name' : 'glide.ui.x_loaner_request_activity.fields',
+	 'description' : 'Activity formatter fields for loaner request form',
+	 'type' : 'string',
+	 'value' : 'assigned_to,cmdb_ci,state,work_notes,comments,*Attachments*,assignment_group,*Email*,depot,item_type,work_end,work_start'
+	 }
+];
+
+for (var i = 0; i < propList.length; i++) {
+	var p = new GlideRecord('sys_properties');
+	p.newRecord();
+	p.setsuffix   = propList[i].suffix;
+	p.name        = propList[i].name;
+	p.description = propList[i].description;
+	p.type        = propList[i].type;
+	p.value       = propList[i].value;
+	p.insert();
+}
+
+/*********** UPDATE sys_app_module *************/
+
+var mod = new GlideRecord('sys_db_object');
+if (mod.get('name', 'sys_app_module')) {
+	mod.create_access = true;
+	mod.update_access = true;
+	mod.update();
+}
+
+/*********** OMIT EDIT AND NEW BUTTON ON APPROVERS **********/
+var rl = new GlideRecord('sys_ui_list_control');
+rl.newRecord();
+rl.name = 'x_loaner_request';
+rl.label = 'Approvers';
+rl.related_list = 'sysapproval_approver.sysapproval';
+rl.omit_edit_button = true;
+rl.omit_new_button = true;
+rl.insert();
+]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-17 02:04:10</sys_created_on>
+        <sys_id>e53b19df073310100e33f7d08c1ed0ce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Loaner system Fix Script - GLOBAL</sys_name>
+        <sys_package display_value="Loaner Request" source="x_loaner">24e4b01167301200f5c55bb557415a68</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">24e4b01167301200f5c55bb557415a68</sys_scope>
+        <sys_update_name>sys_script_fix_e53b19df073310100e33f7d08c1ed0ce</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-10-17 02:04:10</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Loaner Request">24e4b01167301200f5c55bb557415a68</application>
+        <file_path/>
+        <instance_id>5fa7a606db477240cbf6d5b0cf9619ee</instance_id>
+        <instance_name>dev37485</instance_name>
+        <name>sys_script_fix_e53b19df073310100e33f7d08c1ed0ce</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_fix"&gt;&lt;sys_script_fix action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;before&gt;false&lt;/before&gt;&lt;description/&gt;&lt;flush_cache&gt;false&lt;/flush_cache&gt;&lt;name&gt;Loaner system Fix Script - GLOBAL&lt;/name&gt;&lt;record_for_rollback&gt;false&lt;/record_for_rollback&gt;&lt;run_once&gt;true&lt;/run_once&gt;&lt;script&gt;&lt;![CDATA[var propList = [
+	{
+	 'suffix' : null,
+	 'name' : 'glide.ui.x_loaner_task_activity.fields',
+	 'description' : 'Activity formatter fields for loaner task form',
+	 'type' : 'string',
+	 'value' : 'assigned_to,state,opened_by,work_notes,comments,*Attachments*'
+	},
+	{
+	 'suffix' : null,
+	 'name' : 'glide.ui.x_loaner_request_activity.fields',
+	 'description' : 'Activity formatter fields for loaner request form',
+	 'type' : 'string',
+	 'value' : 'assigned_to,cmdb_ci,state,work_notes,comments,*Attachments*,assignment_group,*Email*,depot,item_type,work_end,work_start'
+	 }
+];
+
+for (var i = 0; i &lt; propList.length; i++) {
+	var p = new GlideRecord('sys_properties');
+	p.newRecord();
+	p.setsuffix   = propList[i].suffix;
+	p.name        = propList[i].name;
+	p.description = propList[i].description;
+	p.type        = propList[i].type;
+	p.value       = propList[i].value;
+	p.insert();
+}
+
+/*********** UPDATE sys_app_module *************/
+
+var mod = new GlideRecord('sys_db_object');
+if (mod.get('name', 'sys_app_module')) {
+	mod.create_access = true;
+	mod.update_access = true;
+	mod.update();
+}
+
+/*********** OMIT EDIT AND NEW BUTTON ON APPROVERS **********/
+var rl = new GlideRecord('sys_ui_list_control');
+rl.newRecord();
+rl.name = 'x_loaner_request';
+rl.label = 'Approvers';
+rl.related_list = 'sysapproval_approver.sysapproval';
+rl.omit_edit_button = true;
+rl.omit_new_button = true;
+rl.insert();
+]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_fix&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-10-17 02:04:10&lt;/sys_created_on&gt;&lt;sys_id&gt;e53b19df073310100e33f7d08c1ed0ce&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Loaner system Fix Script - GLOBAL&lt;/sys_name&gt;&lt;sys_package display_value="Loaner Request" source="x_loaner"&gt;24e4b01167301200f5c55bb557415a68&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Loaner Request"&gt;24e4b01167301200f5c55bb557415a68&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_fix_e53b19df073310100e33f7d08c1ed0ce&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-10-17 02:04:10&lt;/sys_updated_on&gt;&lt;unloadable&gt;false&lt;/unloadable&gt;&lt;/sys_script_fix&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>824750481</payload_hash>
+        <record_name>Loaner system Fix Script - GLOBAL</record_name>
+        <reverted_from/>
+        <source>aaa7991f073310100e33f7d08c1ed0fe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-17 02:04:10</sys_created_on>
+        <sys_id>ea4b19df073310100e33f7d08c1ed07d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>175344cd0000000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-10-17 02:04:10</sys_updated_on>
+        <type>Fix Script</type>
+        <update_guid>e24b19df8a331010e24f06ae2d36567d</update_guid>
+        <update_guid_history>e24b19df8a331010e24f06ae2d36567d:824750481</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-17 02:05:52</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_fix">sys_script_fix</sys_db_object>
+        <sys_id>a2866fefbd9141db991eb4500487d821</sys_id>
+        <sys_metadata>e53b19df073310100e33f7d08c1ed0ce</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Loaner system Fix Script - GLOBAL</sys_name>
+        <sys_package display_value="Loaner Request" source="x_loaner">24e4b01167301200f5c55bb557415a68</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">24e4b01167301200f5c55bb557415a68</sys_scope>
+        <sys_scope_delete display_value="">001f7616584b467c9b39648084b91c90</sys_scope_delete>
+        <sys_update_name>sys_script_fix_e53b19df073310100e33f7d08c1ed0ce</sys_update_name>
+        <sys_update_version display_value="sys_script_fix_e53b19df073310100e33f7d08c1ed0ce">ea4b19df073310100e33f7d08c1ed07d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-10-17 02:05:52</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
